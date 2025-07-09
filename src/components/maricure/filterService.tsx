@@ -16,7 +16,6 @@ export default function ServiceFilter({
   services,
   service,
 }: IEnterpriseSelectorProps) {
-  console.log(service);
   const { applyFilters } = useManicuristaFilters();
 
   return (

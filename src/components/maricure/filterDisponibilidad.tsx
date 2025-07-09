@@ -21,6 +21,7 @@ export default function FiltroDisponibilidadCompacto({
   const [inicio, setInicio] = useState(fechaPRop ?? "");
   const [fin, setFin] = useState(finProp ?? "");
   const { applyFilters } = useManicuristaFilters();
+  console.log(fin, inicio, fecha);
 
   return (
     <>
@@ -42,7 +43,7 @@ export default function FiltroDisponibilidadCompacto({
               <label className="text-xs text-gray-600">Fecha</label>
               <Input
                 type="date"
-                value={fecha}
+                defaultValue={fechaPRop}
                 onChange={(e) => setFecha(e.target.value)}
                 className="bg-pink-50"
               />
@@ -51,7 +52,7 @@ export default function FiltroDisponibilidadCompacto({
               <label className="text-xs text-gray-600">Inicio</label>
               <Input
                 type="time"
-                value={inicio}
+                defaultValue={inicioProp}
                 onChange={(e) => setInicio(e.target.value)}
                 className="bg-pink-50"
               />
@@ -60,7 +61,7 @@ export default function FiltroDisponibilidadCompacto({
               <label className="text-xs text-gray-600">Fin</label>
               <Input
                 type="time"
-                value={fin}
+                defaultValue={finProp}
                 onChange={(e) => setFin(e.target.value)}
                 className="bg-pink-50"
               />

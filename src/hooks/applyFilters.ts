@@ -5,7 +5,7 @@ export function useManicuristaFilters() {
   const searchParams = useSearchParams();
 
   const applyFilters = (nuevosFiltros: Record<string, string>) => {
-    const params = new URLSearchParams(searchParams.toString()); // ✅ conserva los actuales
+    const params = new URLSearchParams(searchParams.toString());
 
     Object.entries(nuevosFiltros).forEach(([key, value]) => {
       if (value?.trim()) {

@@ -49,7 +49,7 @@ export default async function FiltroManicuristas({
             finProp={searchParams?.fin}
           />
           <ServiceFilter services={services} service={service} />
-          <FilterPlace />
+          <FilterPlace displayName={searchParams?.ubicacion} />
         </PopoverContent>
       </Popover>
     </div>
