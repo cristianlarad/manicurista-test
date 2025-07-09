@@ -15,6 +15,8 @@ import {
 } from "../ui/select";
 import ServiceSelectorWrapper from "./selectServiceWrapper";
 import { useRouter } from "next/navigation";
+import { DisponibilidadCheckboxes } from "./disponibilidad";
+import { UbicacionInput } from "./inputPlace";
 const initialState = { success: false, error: "" };
 const RegisterForm = () => {
   const router = useRouter();
@@ -46,6 +48,7 @@ const RegisterForm = () => {
           <Label htmlFor="telefono">Telefono</Label>
           <Input id="telefono" placeholder="Telefono" name="telefono" />
         </div>
+        <UbicacionInput />
         <div className="flex flex-col gap-1">
           <Label htmlFor="modalidad_atencion">
             ¿Dónde presta sus servicios?
@@ -60,10 +63,6 @@ const RegisterForm = () => {
             </SelectContent>
           </Select>
         </div>
-      </div>
-
-      {/* Información Personal */}
-      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <Label htmlFor="foto">Foto de Perfil</Label>
           <Input id="foto" type="file" name="perfil" />
@@ -74,9 +73,7 @@ const RegisterForm = () => {
         </div>
         <div className="flex flex-col gap-1">
           <Label htmlFor="horarios">Disponibilidad</Label>
-          <Button type="button" variant="outline">
-            SELECCIONAR HORARIOS
-          </Button>
+          <DisponibilidadCheckboxes />
         </div>
         <div className="flex flex-col gap-1">
           <Label htmlFor="contrasena">Contraseña</Label>
