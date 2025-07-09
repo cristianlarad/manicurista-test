@@ -1,12 +1,13 @@
 import { redirect } from "next/navigation";
 import { SearchIcon } from "lucide-react";
+import { Input } from "../input";
 
-export const SearchBar = () => {
+export const SearchBar = ({ name }: { name?: string }) => {
   async function onSubmit(formData: FormData) {
     "use server";
     const search = formData.get("search") as string;
     if (search && search.trim().length > 0) {
-      redirect(`/search?query=${encodeURIComponent(search)}`);
+      redirect(`/search?name=${encodeURIComponent(search)}`);
     }
   }
 
@@ -17,16 +18,17 @@ export const SearchBar = () => {
     >
       <label className="w-full">
         <span className="sr-only">search</span>
-        <input
+        <Input
           type="text"
           name="search"
           placeholder="Search..."
           autoComplete="on"
           required
-          className="h-10 w-full rounded-md border border-neutral-300 bg-transparent bg-white px-4 py-2 pr-10 text-sm text-black placeholder:text-neutral-500 focus:border-black focus:ring-black"
+          defaultValue={name}
+          className="h-10 w-fit rounded-md border border-neutral-300 bg-transparent px-4 py-2 pr-10 text-sm text-black placeholder:text-neutral-500 focus:border-black focus:ring-black"
         />
       </label>
-      <div className="absolute inset-y-0 right-0">
+      <div className="absolute inset-y-0 right-25">
         <button
           type="submit"
           className="inline-flex aspect-square w-10 items-center justify-center text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 group-invalid:pointer-events-none group-invalid:opacity-80"

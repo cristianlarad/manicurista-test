@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Label } from "../label";
-import { Input } from "../input";
+"use client";
 
+import { useEffect, useState } from "react";
+import { Input } from "../input";
 import {
   Command,
   CommandItem,
@@ -9,14 +9,18 @@ import {
   CommandEmpty,
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
-import { place, SelectedPlaceItem } from "@/types/places";
+import { place } from "@/types/places";
+import { useManicuristaFilters } from "../../hooks/applyFilters";
 
-export function UbicacionInput() {
-  const [search, setSearch] = useState("");
+interface Props {
+  displayName?: string;
+}
+
+export function FilterPlace({ displayName }: Props) {
+  const [search, setSearch] = useState(displayName ?? "");
   const [results, setResults] = useState<place[]>([]);
-  const [selected, setSelected] = useState<SelectedPlaceItem>();
   const [open, setOpen] = useState(false);
-
+  const { applyFilters } = useManicuristaFilters();
   useEffect(() => {
     const delay = setTimeout(() => {
       if (search.length < 3) return;
@@ -34,8 +38,6 @@ export function UbicacionInput() {
 
   return (
     <div className="flex flex-col gap-1">
-      <Label htmlFor="ubicacion">Ubicación</Label>
-
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Input
@@ -43,7 +45,7 @@ export function UbicacionInput() {
             id="ubicacion"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Ubicacion"
+            placeholder="Ubicación"
             className="input"
             name="ubicacion"
           />
@@ -56,16 +58,12 @@ export function UbicacionInput() {
                 {results.length === 0 && (
                   <CommandEmpty>Ubicación no encontrada</CommandEmpty>
                 )}
-
                 {results.slice(0, 5).map((place) => (
                   <CommandItem
                     key={place.place_id}
                     value={place.display_name}
                     onSelect={() => {
-                      setSelected(place);
-                      setSearch(place.display_name);
-                      setOpen(false);
-                      setResults([]);
+                      applyFilters({ ubicacion: place.display_name });
                     }}
                   >
                     {place.display_name}
@@ -76,14 +74,6 @@ export function UbicacionInput() {
           </PopoverContent>
         )}
       </Popover>
-
-      {selected && (
-        <>
-          <input type="hidden" name="latitud" value={selected.lat} />
-          <input type="hidden" name="longitud" value={selected.lon} />
-          <input type="hidden" name="ubicacion" value={selected.display_name} />
-        </>
-      )}
     </div>
   );
 }

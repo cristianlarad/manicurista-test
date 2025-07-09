@@ -21,3 +21,9 @@ export interface IService {
   descripcion: string;
   precio_base: string;
 }
+
+export interface IWorks {
+  usuario_id: string;
+  fotos_trabajos: string;
+  id: number;
+}

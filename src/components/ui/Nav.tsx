@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { NavLinks } from "./NavLinks";
-import { SearchBar } from "./SearchBar";
 import { UserMenuContainer } from "./UserMenuContainer";
 import { CartNavItem } from "./CartNavItem";
 import { MobileMenu } from "./MobileMenu";
@@ -12,9 +11,6 @@ export const Nav = () => {
         <NavLinks />
       </ul>
       <div className="ml-auto flex items-center justify-center gap-4 whitespace-nowrap lg:gap-8">
-        <div className="hidden lg:flex">
-          <SearchBar />
-        </div>
         <Suspense fallback={<div className="w-8" />}>
           <UserMenuContainer />
         </Suspense>
@@ -25,7 +21,6 @@ export const Nav = () => {
         </Suspense>
         <Suspense>
           <MobileMenu>
-            <SearchBar />
             <NavLinks />
           </MobileMenu>
         </Suspense>

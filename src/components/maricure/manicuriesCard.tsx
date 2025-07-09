@@ -7,7 +7,7 @@ import { BadgeCheck, Phone, User } from "lucide-react";
 
 export function ManicuristaCard({ user }: { user: IUser }) {
   return (
-    <Link href={`/perfil/${user.id}`} className="block">
+    <Link href={`/profile/${user.id}`} className="block">
       <Card className="overflow-hidden hover:shadow-lg transition-all border border-gray-100 rounded-xl bg-white">
         <CardHeader className="p-0">
           <AspectRatio ratio={1 / 1}>
