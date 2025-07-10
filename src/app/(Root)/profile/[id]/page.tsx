@@ -1,6 +1,3 @@
-// app/manicura/view/[id]/page.tsx
-import { cookies } from "next/headers";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/avatar";
 import {
   MapPin,
@@ -16,8 +13,8 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/button";
 import Link from "next/link";
-
-const supabase = createServerActionClient({ cookies });
+import { supabaseServerActionClient } from "@/api/supabaseServerActions";
+import MapUbicacion from "@/components/client/ubicactionCard";
 
 export default async function ViewPerfil({
   params,
@@ -26,25 +23,25 @@ export default async function ViewPerfil({
 }) {
   const { id } = await params;
 
-  const { data: user } = await supabase
+  const { data: user } = await supabaseServerActionClient
     .from("Usuario")
     .select("*")
     .eq("id", id)
     .single();
 
-  const { data: perfil } = await supabase
+  const { data: perfil } = await supabaseServerActionClient
     .from("PerfilManicurista")
     .select("*")
     .eq("usuario_id", id)
     .single();
 
-  const { data: servicio } = await supabase
+  const { data: servicio } = await supabaseServerActionClient
     .from("Servicio")
     .select("*")
     .eq("id", perfil?.servicio_id)
     .single();
 
-  const { data: trabajos } = await supabase
+  const { data: trabajos } = await supabaseServerActionClient
     .from("Trabajos")
     .select("*")
     .eq("usuario_id", id);
@@ -151,9 +148,15 @@ export default async function ViewPerfil({
             </div>
           </div>
         )}
+        <MapUbicacion
+          lat={parseFloat(perfil.latitud)}
+          lng={parseFloat(perfil.longitud)}
+          nombre={user.nombre}
+          ubicacion={perfil.ubicacion}
+        />
         <div className="flex gap-3 pt-2 flex-wrap">
           <Button className="bg-pink-800 hover:bg-pink-700">
-            <Link href="books/add">Reservar</Link>
+            <Link href={`/books/${perfil.id}`}>Reservar</Link>
           </Button>
         </div>
       </div>

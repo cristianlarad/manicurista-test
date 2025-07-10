@@ -11,20 +11,18 @@ import {
   ImagePlus,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { IManicure, IService, IWorks } from "@/types/users";
 import { Metadata } from "next";
 import { Button } from "@/components/button";
 import Link from "next/link";
 import Image from "next/image";
+import { supabaseServerActionClient } from "@/api/supabaseServerActions";
 
 export const metadata: Metadata = {
   title: "Perfil | Mi Manicurista",
   description: "Editar Perfil",
 };
-
-const supabase = createServerActionClient({ cookies });
 
 export default async function ProfileCard() {
   const cookieStore = await cookies();
@@ -35,7 +33,7 @@ export default async function ProfileCard() {
   let trabajos: IWorks[] | null = null;
 
   if (isManicura) {
-    const { data: manicura } = await supabase
+    const { data: manicura } = await supabaseServerActionClient
       .from("PerfilManicurista")
       .select("*")
       .eq("usuario_id", user.id)
@@ -44,7 +42,7 @@ export default async function ProfileCard() {
     perfilManicura = manicura as IManicure;
 
     if (perfilManicura?.servicio_id) {
-      const { data: service } = await supabase
+      const { data: service } = await supabaseServerActionClient
         .from("Servicio")
         .select("*")
         .eq("id", perfilManicura.servicio_id)
@@ -53,7 +51,7 @@ export default async function ProfileCard() {
       servicio = service as IService;
     }
 
-    const { data: works } = await supabase
+    const { data: works } = await supabaseServerActionClient
       .from("Trabajos")
       .select("*")
       .eq("usuario_id", user.id);

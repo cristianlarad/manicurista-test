@@ -1,0 +1,33 @@
+export interface AgendaItem {
+  id: string;
+  perfil_id: string;
+  fecha: string;
+  hora_inicio: string;
+  hora_fin: string;
+}
+
+export interface ServicioItem {
+  id: string;
+  nombre: string;
+}
+
+export interface IBooks {
+  id: string;
+  agenda_id: string;
+  clienta_id: string;
+  fecha_reserva: string;
+  estado: string;
+  agenda: {
+    fecha: string;
+    hora_inicio: string;
+    hora_fin: string;
+    perfil: {
+      modalidad_atencion: string;
+      ubicacion: string;
+      perfil: {
+        telefono: string;
+        nombre: string;
+      };
+    };
+  };
+}

@@ -1,9 +1,8 @@
-import { cookies } from "next/headers";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/avatar";
 import { MapPin, BadgeCheck, User } from "lucide-react";
 import FiltroManicuristas from "@/components/maricure/searchManicureLayout";
 import Link from "next/link";
+import { supabaseServerActionClient } from "@/api/supabaseServerActions";
 
 export default async function SearchPage({
   searchParams,
@@ -19,11 +18,10 @@ export default async function SearchPage({
 }) {
   const { fecha, inicio, fin, name, servicio_id, ubicacion } =
     await searchParams;
-  const supabase = createServerActionClient({ cookies });
 
   let idsOcupados: string[] = [];
   if (fecha && inicio && fin) {
-    const { data: ocupados } = await supabase
+    const { data: ocupados } = await supabaseServerActionClient
       .from("Agenda")
       .select("perfil_id")
       .eq("fecha", fecha)
@@ -34,14 +32,16 @@ export default async function SearchPage({
 
   let idsUsuarios: string[] = [];
   if (name?.trim()) {
-    const { data: usuarios } = await supabase
+    const { data: usuarios } = await supabaseServerActionClient
       .from("Usuario")
       .select("id")
       .ilike("nombre", `%${name.trim()}%`);
     idsUsuarios = usuarios?.map((u) => u.id) ?? [];
   }
 
-  let query = supabase.from("PerfilManicurista").select("*, Usuario(*)");
+  let query = supabaseServerActionClient
+    .from("PerfilManicurista")
+    .select("*, Usuario(*)");
 
   if (idsOcupados.length > 0) {
     query = query.not("id", "in", `(${idsOcupados.join(",")})`);

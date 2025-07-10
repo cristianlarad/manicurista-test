@@ -18,7 +18,7 @@ interface IComboboxLocal<T> {
   name: string;
   items: T[];
   placeholder?: string;
-  displayKey: keyof T;
+  displayKey: keyof T | ((item: T) => string);
   valueKey?: keyof T;
   value: T | null;
   onChange: (val: T | null) => void;
@@ -27,19 +27,20 @@ interface IComboboxLocal<T> {
   isLoading?: boolean;
 }
 
-function ComboboxLocal<T>({
-  title,
-  name,
-  items,
-  placeholder,
-  displayKey,
-  valueKey = "id" as keyof T,
-  value,
-  onChange,
-  clearable = true,
-  filterFn,
-  isLoading = false,
-}: IComboboxLocal<T>) {
+function ComboboxLocal<T>(props: IComboboxLocal<T>) {
+  const {
+    title,
+    name,
+    items,
+    placeholder,
+    displayKey,
+    valueKey = "id" as keyof T,
+    value,
+    onChange,
+    clearable = true,
+    filterFn,
+    isLoading = false,
+  } = props;
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [search, setSearch] = React.useState<string>("");
 
@@ -49,9 +50,13 @@ function ComboboxLocal<T>({
     return items.filter((item) => {
       if (filterFn) return filterFn(item, search);
 
-      const displayValue = item[displayKey];
-      if (typeof displayValue === "number") {
-        return String(displayValue).includes(search);
+      let displayValue: string;
+
+      if (typeof displayKey === "function") {
+        displayValue = displayKey(item);
+      } else {
+        const raw = item[displayKey];
+        displayValue = typeof raw === "string" ? raw : String(raw);
       }
       return String(displayValue || "")
         .toLowerCase()
@@ -90,7 +95,9 @@ function ComboboxLocal<T>({
               )}
             >
               <span>
-                {value?.[displayKey] != null
+                {typeof displayKey === "function"
+                  ? displayKey(value!) // asumimos que value no es null
+                  : value?.[displayKey] != null
                   ? String(value[displayKey])
                   : placeholder}
               </span>
@@ -121,7 +128,15 @@ function ComboboxLocal<T>({
                     <CommandGroup>
                       {filteredItems.map((item) => {
                         const val = String(item[valueKey]);
-                        const label = String(item[displayKey]);
+                        let label: string;
+
+                        if (typeof displayKey === "function") {
+                          label = displayKey(item);
+                        } else {
+                          const value = item[displayKey];
+                          label = value != null ? String(value) : "";
+                        }
+
                         return (
                           <CommandItem
                             key={val}

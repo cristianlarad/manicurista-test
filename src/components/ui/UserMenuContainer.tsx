@@ -1,13 +1,12 @@
 import { UserIcon } from "lucide-react";
 import { UserMenu } from "./UserMenu";
 import Link from "next/link";
-import { getUsuarioById } from "@/utils/getUser";
-import { cookies } from "next/headers";
+import { IUser } from "@/types/users";
 
-export async function UserMenuContainer() {
-  const cookieStore = await cookies();
-  const user = await getUsuarioById(cookieStore);
-
+interface Props {
+  user: IUser;
+}
+export async function UserMenuContainer({ user }: Props) {
   if (user) {
     return <UserMenu user={user} />;
   } else {

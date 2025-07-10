@@ -3,16 +3,22 @@ import { NavLinks } from "./NavLinks";
 import { UserMenuContainer } from "./UserMenuContainer";
 import { CartNavItem } from "./CartNavItem";
 import { MobileMenu } from "./MobileMenu";
+import { getUsuarioById } from "@/utils/getUser";
+import { cookies } from "next/headers";
 
-export const Nav = () => {
+export const Nav = async () => {
+  const cookieStore = await cookies();
+  const user = await getUsuarioById(cookieStore);
+  console.log(user);
+
   return (
     <nav className="flex w-full gap-4 lg:gap-6" aria-label="Main navigation">
       <ul className="hidden gap-4 overflow-x-auto whitespace-nowrap md:flex lg:gap-8 lg:px-0">
-        <NavLinks />
+        <NavLinks tipo_usuario={user.tipo_usuario} />
       </ul>
       <div className="ml-auto flex items-center justify-center gap-4 whitespace-nowrap lg:gap-8">
         <Suspense fallback={<div className="w-8" />}>
-          <UserMenuContainer />
+          <UserMenuContainer user={user} />
         </Suspense>
       </div>
       <div className="flex items-center gap-1.5">
@@ -21,7 +27,7 @@ export const Nav = () => {
         </Suspense>
         <Suspense>
           <MobileMenu>
-            <NavLinks />
+            <NavLinks tipo_usuario={user.tipo_usuario} />
           </MobileMenu>
         </Suspense>
       </div>
