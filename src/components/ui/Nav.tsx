@@ -9,7 +9,6 @@ import { cookies } from "next/headers";
 export const Nav = async () => {
   const cookieStore = await cookies();
   const user = await getUsuarioById(cookieStore);
-  console.log(user);
 
   return (
     <nav className="flex w-full gap-4 lg:gap-6" aria-label="Main navigation">

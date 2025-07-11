@@ -6,7 +6,7 @@ import { CardResumen } from "@/components/maricure/cardResumen";
 import { BadgeCheck, CalendarDays, Clock, ListChecks } from "lucide-react";
 export const metadata: Metadata = {
   title: "Inicio | Mi Manicurista",
-  description: "Editar Perfil",
+  description: "Inicio",
 };
 
 export default async function Page() {

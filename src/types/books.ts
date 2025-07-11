@@ -25,9 +25,34 @@ export interface IBooks {
       modalidad_atencion: string;
       ubicacion: string;
       perfil: {
+        id: string;
         telefono: string;
         nombre: string;
       };
     };
   };
+}
+export interface Reserva {
+  id: string;
+  fecha_reserva: string;
+  estado: "pendiente" | "confirmado" | "cancelado";
+  agenda: Agenda | null;
+  clienta: Usuario;
+}
+
+export interface Agenda {
+  fecha: string;
+  hora_inicio: string;
+  hora_fin: string;
+  usuario_id: string;
+  perfil: {
+    id: string;
+    nombre: string;
+  };
+}
+
+export interface Usuario {
+  nombre: string;
+  telefono: string;
+  tipo_usuario: "clienta" | "manicurista";
 }

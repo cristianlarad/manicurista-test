@@ -25,7 +25,7 @@ export default function WorksAddPage() {
     setPreviews(files.map((file) => URL.createObjectURL(file)));
   };
 
-  if (state.success) router.back();
+  if (state.success) router.push("/profile");
 
   return (
     <form

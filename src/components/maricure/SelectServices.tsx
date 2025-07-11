@@ -18,7 +18,6 @@ export default function ServiceSelector({
 }: IEnterpriseSelectorProps) {
   const [selectedService, setSelectedService] =
     useState<IServicesSelectorItems | null>(service ? service : null);
-  console.log(service);
 
   return (
     <div className="max-w-full">

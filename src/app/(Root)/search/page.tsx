@@ -3,7 +3,11 @@ import { MapPin, BadgeCheck, User } from "lucide-react";
 import FiltroManicuristas from "@/components/maricure/searchManicureLayout";
 import Link from "next/link";
 import { supabaseServerActionClient } from "@/api/supabaseServerActions";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Buscar | Mi Manicurista",
+  description: "Buscar",
+};
 export default async function SearchPage({
   searchParams,
 }: {

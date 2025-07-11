@@ -1,4 +1,6 @@
 import { supabaseServerActionClient } from "@/api/supabaseServerActions";
+import { Button } from "@/components/button";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { IBooks } from "@/types/books";
 import {
   BadgeCheck,
@@ -9,19 +11,25 @@ import {
   ScanEye,
   User,
 } from "lucide-react";
-
+import { Metadata } from "next";
+import Link from "next/link";
+export const metadata: Metadata = {
+  title: "Reservas | Mi Manicurista",
+  description: "Reservas",
+};
 export default async function MyBooks() {
   const {
     data: { user },
   } = await supabaseServerActionClient.auth.getUser();
 
-  const { data: book, error } = await supabaseServerActionClient
+  const { data: book } = await supabaseServerActionClient
     .from("Reserva")
     .select(
       `
     id,
     estado,
     fecha_reserva,
+    clienta_id,
     agenda:agenda_id (
       fecha,
       hora_inicio,
@@ -41,8 +49,6 @@ export default async function MyBooks() {
     .eq("clienta_id", user?.id);
 
   const books = book as unknown as IBooks[];
-  console.log(books);
-  console.log(error);
 
   return (
     <section className="py-6">
@@ -62,17 +68,7 @@ export default async function MyBooks() {
                 <User className="w-4 h-4" />
                 {reserva.agenda.perfil.perfil.nombre}
               </h3>
-              <span
-                className={`px-2 py-1 text-xs rounded font-medium ${
-                  reserva.estado === "confirmado"
-                    ? "bg-green-100 text-green-700"
-                    : reserva.estado === "pendiente"
-                    ? "bg-yellow-100 text-yellow-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {reserva.estado}
-              </span>
+              <StatusBadge status={reserva.estado} />
             </div>
 
             <ul className="space-y-2 text-sm text-gray-700">
@@ -99,6 +95,13 @@ export default async function MyBooks() {
                 <span>{reserva.agenda.perfil.perfil.telefono}</span>
               </li>
             </ul>
+            <div className="flex items-center justify-end">
+              <Link href={`/calificar/${reserva.id}`}>
+                <Button className="bg-pink-600 hover:bg-pink-800">
+                  Calificar
+                </Button>
+              </Link>
+            </div>
           </div>
         ))}
       </div>

@@ -21,7 +21,6 @@ export default function FiltroDisponibilidadCompacto({
   const [inicio, setInicio] = useState(fechaPRop ?? "");
   const [fin, setFin] = useState(finProp ?? "");
   const { applyFilters } = useManicuristaFilters();
-  console.log(fin, inicio, fecha);
 
   return (
     <>

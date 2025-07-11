@@ -38,7 +38,6 @@ export async function handleManicureRegister(
       cacheControl: "3600",
       contentType: file.type,
     });
-  console.log(uploadError);
   if (uploadError) {
     return { success: false, error: "Error al subir la imagen" };
   }

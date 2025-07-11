@@ -2,8 +2,12 @@
 
 import FormCrearAgenda from "@/components/agenda/FormCrearAgenda";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
-
+export const metadata: Metadata = {
+  title: "Agenda| Mi Manicurista",
+  description: "Agenda",
+};
 export default async function AgendaPage() {
   const supabase = createServerComponentClient({ cookies });
 

@@ -4,8 +4,14 @@ import { Label } from "@/components/label";
 import { AgendaItem } from "@/types/books";
 import { getUsuarioById } from "@/utils/getUser";
 import { EditIcon, Trash2 } from "lucide-react";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Agenda | Mi Manicurista",
+  description: "Agenda",
+};
 export default async function AgendaPage() {
   const cookieStore = await cookies();
   const user = await getUsuarioById(cookieStore);

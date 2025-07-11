@@ -15,7 +15,12 @@ import { Button } from "@/components/button";
 import Link from "next/link";
 import { supabaseServerActionClient } from "@/api/supabaseServerActions";
 import MapUbicacion from "@/components/client/ubicactionCard";
-
+import { Metadata } from "next";
+import CalificacionesCard from "@/components/client/CalificacionesCard";
+export const metadata: Metadata = {
+  title: "Perfil | Mi Manicurista",
+  description: "Perfil",
+};
 export default async function ViewPerfil({
   params,
 }: {
@@ -154,6 +159,7 @@ export default async function ViewPerfil({
           nombre={user.nombre}
           ubicacion={perfil.ubicacion}
         />
+        <CalificacionesCard manicuristaId={id} />
         <div className="flex gap-3 pt-2 flex-wrap">
           <Button className="bg-pink-800 hover:bg-pink-700">
             <Link href={`/books/${perfil.id}`}>Reservar</Link>

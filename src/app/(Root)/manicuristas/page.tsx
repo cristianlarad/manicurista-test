@@ -3,7 +3,11 @@ import { cookies } from "next/headers";
 import { IUser } from "@/types/users";
 import { ManicuristaCard } from "@/components/maricure/manicuriesCard";
 import SearchFilters from "@/components/maricure/searchManicureLayout";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Manicuristas | Mi Manicurista",
+  description: "Reservas",
+};
 const supabase = createServerComponentClient({ cookies });
 
 export default async function ManicuristasPage() {

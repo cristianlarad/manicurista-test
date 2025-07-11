@@ -1,8 +1,12 @@
 import { supabaseServerActionClient } from "@/api/supabaseServerActions";
 import ReservaWizard from "@/components/client/books/booksWizard";
 import { AgendaItem, ServicioItem } from "@/types/books";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
-
+export const metadata: Metadata = {
+  title: "Reserva | Mi Manicurista",
+  description: "Reserva",
+};
 export default async function ReservaPage({
   params,
 }: {

@@ -27,3 +27,24 @@ export interface IWorks {
   fotos_trabajos: string;
   id: number;
 }
+export interface IEditManicure {
+  id: string;
+  nombre: string;
+  correo: string;
+  telefono: string;
+  rut: string;
+  tipo_usuario: "manicura" | "clienta"; // extendible si tenés más roles
+  perfil: IManicurePerfil[]; // relación uno a varios, aunque en práctica sea uno solo
+}
+
+export interface IManicurePerfil {
+  id: string;
+  perfil_url: string;
+  servicio_id: string;
+  disponibilidad: string;
+  fotos_trabajos_id: string;
+  modalidad_atencion: "DOMICILIO" | "ESTABLECIMIENTO";
+  ubicacion: string;
+  latitud: string;
+  longitud: string;
+}

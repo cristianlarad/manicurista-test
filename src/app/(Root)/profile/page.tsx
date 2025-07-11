@@ -159,11 +159,21 @@ export default async function ProfileCard() {
 
         {/* Botones */}
         <div className="flex gap-3 pt-2 flex-wrap">
+          {isManicura && (
+            <Button className="bg-pink-800 hover:bg-pink-700">
+              <Link href="works/add">Agregar trabajos</Link>
+            </Button>
+          )}
           <Button className="bg-pink-800 hover:bg-pink-700">
-            <Link href="works/add">Agregar trabajos</Link>
-          </Button>
-          <Button className="bg-pink-800 hover:bg-pink-700">
-            <Link href="profile/edit">Editar perfil</Link>
+            <Link
+              href={
+                user.tipo_usuario === "clienta"
+                  ? `profile/clienta/${user.id}`
+                  : `profile/manicure/${user.id}`
+              }
+            >
+              Editar perfil
+            </Link>
           </Button>
         </div>
       </div>

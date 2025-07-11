@@ -38,5 +38,5 @@ export async function uploadTrabajosAction(
     if (dbError) return { success: false, error: dbError.message };
   }
 
-  return { success: false, error: "Algo falló" };
+  return { success: true, error: "Imagen subida" };
 }
