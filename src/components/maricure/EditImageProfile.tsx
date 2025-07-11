@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { supabaseClientComponent } from "@/api/supabaseClient";
+import { useRouter } from "next/navigation";
 
 export default function EditImageProfile({ userId }: { userId: string }) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [mensaje, setMensaje] = useState("");
+  const router = useRouter();
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -45,7 +47,8 @@ export default function EditImageProfile({ userId }: { userId: string }) {
     }
 
     setPreviewUrl(publicUrl);
-    setMensaje("Foto actualizada con éxito 🎉");
+    setMensaje("Foto actualizada con éxito");
+    router.refresh();
     setUploading(false);
   };
 

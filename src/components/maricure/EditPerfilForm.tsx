@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { EditInputPlace } from "./EditInputPlace";
+import { redirect } from "next/navigation";
 
 const initialState = { success: null, message: "" };
 
@@ -27,8 +28,9 @@ export default function EditPerfilFormManicurie({
     { success: boolean | null; message: string },
     FormData
   >(updateManicurista, initialState);
-  console.log(manicure);
-
+  if (state.success) {
+    redirect("/profile");
+  }
   return (
     <form action={formAction} className="space-y-4">
       <input type="hidden" name="usuario_id" value={manicure.id} />

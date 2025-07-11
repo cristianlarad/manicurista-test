@@ -1,7 +1,5 @@
 "use client";
 
-import { IUser } from "@/types/users";
-import { Button } from "../button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +12,8 @@ import { UserInfo } from "../UserInfo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logout } from "../client/auth/actions";
+import { IUser } from "@/types/users";
+import { Button } from "../button";
 
 type Props = {
   user: IUser;
@@ -30,13 +30,14 @@ export function UserMenu({ user }: Props) {
       console.error("Error al cerrar sesión:", result.error);
     }
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="relative flex rounded-full bg-neutral-200 p-1 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-neutral-800"
-          aria-label="Open user menu"
+          className="relative flex items-center justify-center rounded-full bg-neutral-100 p-1 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+          aria-label="Abrir menú de usuario"
         >
           <UserAvatar user={user} />
         </Button>
@@ -44,31 +45,35 @@ export function UserMenu({ user }: Props) {
 
       <DropdownMenuContent
         align="end"
-        className="w-48 divide-y divide-neutral-200"
+        sideOffset={8}
+        className="w-50 rounded-lg px-4 border border-neutral-200 bg-white shadow-lg"
       >
-        {/* Información del usuario */}
-        <UserInfo user={user} />
+        {/* Encabezado con datos del usuario */}
+        <div>
+          <UserInfo user={user} />
+        </div>
+
+        <DropdownMenuSeparator />
 
         {/* Navegación */}
         <DropdownMenuItem asChild>
           <Link
             href="/profile"
-            className="block w-full px-4 py-2 text-sm font-medium text-neutral-500 hover:text-neutral-700"
+            className="block w-full py-2 text-sm font-medium text-pink-600 hover:bg-pink-50"
           >
-            Perfil
+            Ver perfil
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         {/* Cierre de sesión */}
-        <DropdownMenuItem asChild>
-          {/* action={logout} */}
+        <DropdownMenuItem>
           <button
             onClick={handleLogout}
-            className="block w-full px-4 py-2 text-start text-sm font-medium text-neutral-500 hover:text-neutral-700"
+            className="w-full text-left  py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
           >
-            Log Out
+            Desconectar
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,18 +1,26 @@
 import { IUser } from "@/types/users";
+import { UserAvatar } from "./UserAvatar";
 
 type Props = {
   user: IUser;
 };
 
 export const UserInfo = ({ user }: Props) => {
-  const userName = user.nombre ? `${user.nombre}` : null;
+  const userName = user.nombre?.trim();
+  const userEmail = user.correo?.trim();
 
   return (
-    <p className="truncate px-5 py-2 text-xs text-neutral-700">
-      {userName && (
-        <span className="mb-0.5 block truncate font-bold">{userName}</span>
-      )}
-      {user.correo}
-    </p>
+    <div className="flex items-center gap-3 py-2">
+      <UserAvatar user={user} />
+
+      <div className="min-w-0">
+        {userName && (
+          <p className="text-sm font-semibold text-neutral-900 truncate">
+            {userName}
+          </p>
+        )}
+        <p className="text-xs text-neutral-500 truncate">{userEmail}</p>
+      </div>
+    </div>
   );
 };

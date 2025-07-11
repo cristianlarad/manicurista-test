@@ -6,6 +6,8 @@ import { MobileMenu } from "./MobileMenu";
 import { getUsuarioById } from "@/utils/getUser";
 import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
+
 export const Nav = async () => {
   const cookieStore = await cookies();
   const user = await getUsuarioById(cookieStore);
