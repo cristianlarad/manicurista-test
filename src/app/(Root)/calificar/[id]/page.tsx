@@ -1,5 +1,6 @@
 import { supabaseServerActionClient } from "@/api/supabaseServerActions";
 import FormCalificacion from "@/components/client/formCalificacion";
+import { ButtonBack } from "@/components/ui/ButtonBack";
 import { IBooks } from "@/types/books";
 import { getUsuarioById } from "@/utils/getUser";
 import { Metadata } from "next";
@@ -40,16 +41,19 @@ export default async function CalificarPage({
   const reserva = data as unknown as IBooks;
 
   return (
-    <div className="max-w-md mx-auto my-8 p-4 bg-white rounded shadow">
-      <h2 className="text-xl font-semibold text-pink-700 text-center mb-4">
-        Calificar atención recibida
-      </h2>
+    <>
+      <ButtonBack />
+      <div className="max-w-md mx-auto my-8 p-4 bg-white rounded shadow">
+        <h2 className="text-xl font-semibold text-pink-700 text-center mb-4">
+          Calificar atención recibida
+        </h2>
 
-      <FormCalificacion
-        reserva_id={id}
-        userId={user.id ?? ""}
-        manicuristaId={reserva.agenda?.perfil.perfil.id}
-      />
-    </div>
+        <FormCalificacion
+          reserva_id={id}
+          userId={user.id ?? ""}
+          manicuristaId={reserva.agenda?.perfil.perfil.id}
+        />
+      </div>
+    </>
   );
 }

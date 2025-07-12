@@ -71,7 +71,10 @@ export default function FormCalificacion({
         />
       </div>
 
-      <Button type="submit" className="w-full bg-pink-600 text-white">
+      <Button
+        type="submit"
+        className="w-full bg-pink-600 text-white hover:bg-pink-800"
+      >
         Enviar reseña
       </Button>
 

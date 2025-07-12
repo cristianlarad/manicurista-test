@@ -21,7 +21,7 @@ export function ManicuristaCard({ user }: { user: IUser }) {
               />
             ) : (
               <Image
-                src="/images/default-avatar.png"
+                src="/default-avatar.webp"
                 alt="Avatar por defecto"
                 width={512}
                 height={412}

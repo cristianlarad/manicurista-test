@@ -2,6 +2,7 @@ import { supabaseServerActionClient } from "@/api/supabaseServerActions";
 import { Label } from "@/components/label";
 import EditImageProfile from "@/components/maricure/EditImageProfile";
 import EditPerfilFormManicurie from "@/components/maricure/EditPerfilForm";
+import { ButtonBack } from "@/components/ui/ButtonBack";
 import { Card } from "@/components/ui/card";
 import { IEditManicure } from "@/types/users";
 import { Metadata } from "next";
@@ -44,13 +45,18 @@ export default async function EditPerfilManicurePage({
   const manicure = data as IEditManicure;
 
   return (
-    <Card className="p-6 space-y-4">
-      <h2 className="text-lg font-semibold text-gray-800">Editar perfil</h2>
-      <div className="space-y-2">
-        <Label htmlFor="perfil_url">Foto de perfil</Label>
-        <EditImageProfile userId={manicure.id} />
+    <>
+      <ButtonBack />
+      <div className=" flex flex-col items-center justify-center">
+        <Card className="p-6 space-y-4 mt-3 ">
+          <h2 className="text-lg font-semibold text-gray-800">Editar perfil</h2>
+          <div className="space-y-2">
+            <Label htmlFor="perfil_url">Foto de perfil</Label>
+            <EditImageProfile userId={manicure.id} />
+          </div>
+          <EditPerfilFormManicurie manicure={manicure} />
+        </Card>
       </div>
-      <EditPerfilFormManicurie manicure={manicure} />
-    </Card>
+    </>
   );
 }

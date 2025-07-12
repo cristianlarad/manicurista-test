@@ -51,5 +51,5 @@ export async function createCalificacion(
     return { success: false, message: "Error al enviar la reseña." };
   }
 
-  return { success: true, message: "¡Reseña enviada con éxito! 🎉" };
+  return { success: true, message: "¡Reseña enviada con éxito!" };
 }

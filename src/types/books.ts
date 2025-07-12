@@ -24,6 +24,8 @@ export interface IBooks {
     perfil: {
       modalidad_atencion: string;
       ubicacion: string;
+      latitud: string;
+      longitud: string;
       perfil: {
         id: string;
         telefono: string;

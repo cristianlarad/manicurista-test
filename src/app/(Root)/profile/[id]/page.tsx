@@ -52,9 +52,7 @@ export default async function ViewPerfil({
     .eq("usuario_id", id);
 
   if (!user || !perfil) {
-    return (
-      <div className="text-center py-12">❌ Manicurista no encontrada</div>
-    );
+    return <div className="text-center py-12"> Manicurista no encontrada</div>;
   }
 
   return (
@@ -157,7 +155,6 @@ export default async function ViewPerfil({
           lat={parseFloat(perfil.latitud)}
           lng={parseFloat(perfil.longitud)}
           nombre={user.nombre}
-          ubicacion={perfil.ubicacion}
         />
         <CalificacionesCard manicuristaId={id} />
         <div className="flex gap-3 pt-2 flex-wrap">

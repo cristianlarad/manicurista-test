@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from "../dropdown-menu"; // ← ajusta la ruta según tu estructura
+} from "../dropdown-menu";
 import { useMobileMenu } from "./useMobileMenu";
 import type { ReactNode } from "react";
 import { Menu } from "lucide-react";
@@ -23,7 +23,7 @@ export const MobileMenu = ({ children }: Props) => {
     >
       <DropdownMenuTrigger asChild>
         <Menu
-          className="h-6 w-6 cursor-pointer md:hidden"
+          className="h-6 w-6 cursor-pointer md:hidden text-neutral-600 hover:text-pink-600 transition-colors"
           aria-label="Abrir menú"
         />
       </DropdownMenuTrigger>
@@ -31,11 +31,10 @@ export const MobileMenu = ({ children }: Props) => {
       <DropdownMenuContent
         align="end"
         side="bottom"
-        className="w-[300px] p-0 z-50  shadow border "
+        className="w-[150px] max-w-xs rounded-xl border border-neutral-300 bg-white shadow-xl transition-all z-50"
         id="mobile-menu"
       >
-        {/* Navigation Items */}
-        <ul className="flex flex-col divide-y divide-neutral-200 whitespace-nowrap px-3 pb-3 pt-0 sm:px-8 sm:pt-0 [&>li]:py-3">
+        <ul className="flex flex-col divide-y divide-neutral-200 px-4 py-3 [&>li]:py-3 [&>li]:text-sm [&>li]:text-neutral-700 [&>li]:hover:bg-neutral-100 [&>li]:rounded-md">
           {children}
         </ul>
       </DropdownMenuContent>

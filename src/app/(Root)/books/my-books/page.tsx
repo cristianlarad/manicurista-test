@@ -37,6 +37,8 @@ export default async function MyBooks() {
       perfil:perfil_id (
         id,
         ubicacion,
+        latitud,
+        longitud,
         modalidad_atencion,
         perfil:usuario_id (
           nombre,
@@ -96,6 +98,18 @@ export default async function MyBooks() {
               </li>
             </ul>
             <div className="flex items-center justify-end">
+              <Link
+                target="_blank"
+                href={`https://www.google.com/maps?q=${reserva.agenda.perfil.latitud},${reserva.agenda.perfil.longitud}`}
+              >
+                <Button
+                  variant="link"
+                  className="flex items-center gap-1 text-pink-600"
+                >
+                  <MapPin />
+                  Ubicacion
+                </Button>
+              </Link>
               <Link href={`/calificar/${reserva.id}`}>
                 <Button className="bg-pink-600 hover:bg-pink-800">
                   Calificar

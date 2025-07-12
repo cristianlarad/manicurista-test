@@ -1,6 +1,7 @@
 // File: app/manicurista/agenda/page.tsx
 
 import FormCrearAgenda from "@/components/agenda/FormCrearAgenda";
+import { ButtonBack } from "@/components/ui/ButtonBack";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -34,11 +35,14 @@ export default async function AgendaPage() {
   }
 
   return (
-    <div className="max-w-xl mx-auto py-12 px-4">
-      <h1 className="text-2xl font-bold text-pink-700 mb-6">
-        Crear disponibilidad
-      </h1>
-      <FormCrearAgenda manicuristaId={perfil.id} userId={user.id ?? ""} />
-    </div>
+    <>
+      <ButtonBack />
+      <div className="max-w-xl mx-auto py-12 px-4">
+        <h1 className="text-2xl font-bold text-pink-700 mb-6">
+          Crear disponibilidad
+        </h1>
+        <FormCrearAgenda manicuristaId={perfil.id} userId={user.id ?? ""} />
+      </div>
+    </>
   );
 }

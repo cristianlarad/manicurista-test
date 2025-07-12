@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { NavLinks } from "./NavLinks";
 import { UserMenuContainer } from "./UserMenuContainer";
-import { CartNavItem } from "./CartNavItem";
 import { MobileMenu } from "./MobileMenu";
 import { getUsuarioById } from "@/utils/getUser";
 import { cookies } from "next/headers";
@@ -23,9 +22,9 @@ export const Nav = async () => {
         </Suspense>
       </div>
       <div className="flex items-center gap-1.5">
-        <Suspense fallback={<div className="w-6" />}>
+        {/* <Suspense fallback={<div className="w-6" />}>
           <CartNavItem />
-        </Suspense>
+        </Suspense> */}
         <Suspense>
           <MobileMenu>
             <NavLinks tipo_usuario={user.tipo_usuario} />

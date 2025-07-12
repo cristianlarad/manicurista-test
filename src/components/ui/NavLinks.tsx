@@ -7,13 +7,12 @@ import { buttonVariants } from "../button";
 interface Props {
   tipo_usuario: string;
 }
+
 const navItemsClienta = [
   { id: "1", label: "Inicio", href: "/" },
   { id: "2", label: "Mis Reservas", href: "/books/my-books" },
-  { id: "3", label: "Ofertas", href: "/collections/ofertas" },
-  { id: "4", label: "Nosotros", href: "/pages/nosotros" },
-  { id: "5", label: "Blog", href: "https://blog.example.com", external: true },
 ];
+
 const navItemsManicura = [
   { id: "1", label: "Inicio", href: "/" },
   { id: "2", label: "Agenda", href: "/agenda" },
@@ -21,31 +20,23 @@ const navItemsManicura = [
 ];
 
 export const NavLinks = ({ tipo_usuario }: Props) => {
-  let navItems = navItemsClienta;
+  const navItems =
+    tipo_usuario === "manicura" ? navItemsManicura : navItemsClienta;
 
-  if (tipo_usuario === "manicura") {
-    navItems = navItemsManicura;
-  }
   return (
-    <nav className=" flex flex-col items-center md:flex-row gap-3">
-      {navItems?.map((item) => {
-        const isExternal = item.external ?? false;
-
-        return (
-          <Link
-            key={item.id}
-            href={item.href}
-            target={isExternal ? "_blank" : undefined}
-            rel={isExternal ? "noopener noreferrer" : undefined}
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "px-3 py-1 text-sm font-medium"
-            )}
-          >
-            {item.label}
-          </Link>
-        );
-      })}
+    <nav className="flex flex-col gap-2 md:flex-row md:gap-4 lg:gap-6 items-center">
+      {navItems.map((item) => (
+        <Link
+          key={item.id}
+          href={item.href}
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "px-4 py-2 rounded-md text-sm font-medium text-neutral-600 hover:text-pink-600 hover:bg-pink-50 transition-colors duration-200"
+          )}
+        >
+          {item.label}
+        </Link>
+      ))}
     </nav>
   );
 };

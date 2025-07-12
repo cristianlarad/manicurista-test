@@ -18,7 +18,7 @@ export function useManicuristaFilters() {
     router.push(`/search?${params.toString()}`);
   };
   const resetFilters = () => {
-    router.push("/search");
+    router.push("/manicuristas");
   };
 
   return { applyFilters, resetFilters };

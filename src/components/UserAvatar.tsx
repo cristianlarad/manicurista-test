@@ -6,16 +6,12 @@ type Props = {
 };
 
 export const UserAvatar = ({ user }: Props) => {
-  const label = user.nombre
-    ? `${user.nombre.slice(0, 2)}`
-    : user.correo.slice(0, 2);
-
   if (user.perfil_url) {
     return (
       <Image
         className="h-8 w-8 rounded-full border"
         aria-hidden="true"
-        src={user.perfil_url}
+        src={user.perfil_url ?? "/default-avatar.webp"}
         width={24}
         height={24}
         alt=""
@@ -24,11 +20,13 @@ export const UserAvatar = ({ user }: Props) => {
   }
 
   return (
-    <span
-      className="flex h-8 w-8 items-center justify-center rounded-full border bg-white text-center text-xs font-bold uppercase"
+    <Image
+      className="h-8 w-8 rounded-full border"
       aria-hidden="true"
-    >
-      {label}
-    </span>
+      src={"/default-avatar.webp"}
+      width={24}
+      height={24}
+      alt=""
+    />
   );
 };

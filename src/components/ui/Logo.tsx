@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const companyName = "ACME";
+const companyName = "MANICURISTA";
 
 export const Logo = () => {
   const pathname = usePathname();
@@ -16,7 +16,7 @@ export const Logo = () => {
     );
   }
   return (
-    <div className="flex items-center font-bold">
+    <div className="flex items-center font-bold text-pink-600">
       <Link aria-label="homepage" href="/">
         {companyName}
       </Link>
